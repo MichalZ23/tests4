@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <table>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if user.username != currentUserName %}
+                    <form method="post" action="{{ path('app_admin_user_delete', {id: user.id}) }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input name="delete" type="submit" value="delete">
+                    </form>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ path('app_logout') }}">logout</a>
+{% endblock %}

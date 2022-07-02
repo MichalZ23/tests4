@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserPanelController!{% endblock %}
+
+{% block body %}
+
+    {{ user.name }}
+    {{ user.surname }}
+    {{ user.email }}
+    {% for role in user.roles %}
+        {{ role }}
+    {% endfor %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_admin') }}">admin panel</a>
+    {% endif %}
+    <a href="{{ path('app_logout') }}">logout</a>
+{% endblock %}
